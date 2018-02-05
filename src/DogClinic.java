@@ -16,9 +16,13 @@ public class DogClinic
      */
     public DogClinic()
     {
-        dog1 = new Dog(1, "Fido", 2010, 1, 28);
+        dog1 = new Dog("Fido", 2010, 1, 28);
         
         System.out.println(dog1.getAge());
+    }
+    
+    public void addDog(Dog newDog) {
+        // add a dog
     }
 
 }
