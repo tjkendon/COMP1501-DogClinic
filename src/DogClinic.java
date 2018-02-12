@@ -1,28 +1,63 @@
+package src;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * DogClinic Class to drive examples of the Dog Class.
+ * DogClinic Class to contain departments and dogs at a clinic and it provides 
  *
  * @author Tyson Kendon
- * @version January 29, 2018
+ * @version Feburary 8, 2018
  */
 public class DogClinic
 {
 
-    private Dog dog1;
-    private Dog dog2;
+    ArrayList<Department> departments; // a list of all the departments in the clinic
 
     /**
-     * Constructor for objects of class DogClinic
+     * Creates a new DogClinic with an empty list of department.
      */
-    public DogClinic()
-    {
-        dog1 = new Dog("Fido", 2010, 1, 28);
-        
-        System.out.println(dog1.getAge());
+    public DogClinic() {
+
+        departments = new ArrayList<>();
+
     }
-    
-    public void addDog(Dog newDog) {
-        // add a dog
+    /**
+     * Adds a new department to the clinic 
+     */
+    public void addDepartment(Department department) {
+        departments.add(department);
+    }
+
+    /**
+     * Returns a list of all the departments.
+     */
+    public List<Department> getDepartments() {
+        return departments;
+    }
+
+    /**
+     * Returns a list of all DogsLists from all departments that contains 
+     * the dogs in that departmetn.
+     */
+    public List<DogList> getAllDepartmentDogLists() {
+        ArrayList<DogList> lists = new ArrayList<>();
+        for (Department d : getDepartments()) {
+            lists.add(d.getDogList());
+        }
+        return lists;
+    }
+
+    /**
+     * Returns a list of all DogsLists from all departments containing the dogs that need
+     * an appointment.
+     */
+    public List<DogList> getAllDepartmentNeedsAppointmentDogLists() {
+        ArrayList<DogList> lists = new ArrayList<>();
+        for (Department d : getDepartments()) {
+            lists.add(d.getNeedsAppointmentList());
+        }
+        return lists;
     }
 
 }

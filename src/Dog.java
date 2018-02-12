@@ -1,10 +1,11 @@
+package src;
 
 import java.util.Calendar;
 /**
  * A class to hold data about a dog at a clinic.
  *
  * @author Tyson Kendon
- * @version February 5, 2018
+ * @version February 8, 2018
  */
 public class Dog
 {
@@ -57,17 +58,16 @@ public class Dog
             otherDog.getDateOfBirth().get(Calendar.MONTH),
             otherDog.getDateOfBirth().get(Calendar.DAY_OF_MONTH));
 
-        if (otherDog.getLastAppointment != null) {
-		lastAppointment = Calendar.getInstance();
-        	lastAppointment.set(
-			otherDog.lastAppointment().get(Calendar.YEAR), 
-            		otherDog.lastAppointment().get(Calendar.MONTH),
-            		otherDog.lastAppointment().get(Calendar.DAY_OF_MONTH));
-	}
+        if (otherDog.getLastAppointment() != null) {
+            lastAppointment = Calendar.getInstance();
+            lastAppointment.set(
+                otherDog.getLastAppointment().get(Calendar.YEAR), 
+                otherDog.getLastAppointment().get(Calendar.MONTH),
+                otherDog.getLastAppointment().get(Calendar.DAY_OF_MONTH));
+        }
 
-        
     }
-
+   
     /**
      * 
      * Returns the unique id of the dog.
@@ -86,6 +86,9 @@ public class Dog
         return name;
     }
 
+    /**
+     * Sets the name of the dog.
+     */
     public void setName(String newName) {
         this.name = newName;
     }
@@ -153,13 +156,26 @@ public class Dog
 
     }
 
+    /** Sets the year, month and day of the dogs last appointment
+     * to the current year, month, and day.
+     */
+    public void setLastAppointmentNow() {
+        lastAppointment = Calendar.getInstance();
+    }
+
     /**
      *
      * Returns the ID and the name of the dog as a string.
      *
      */
     public String toString() {
-        return getID() + " - " + getName();
+        if (lastAppointment == null) {
+            return getID() + " - " + getName() + "- No Last Appointment";
+        } else {
+            return getID() + " - " + getName() + " - " + getLastAppointment().get(Calendar.YEAR) 
+            + " / " + getLastAppointment().get(Calendar.MONTH) 
+            + " / " + getLastAppointment().get(Calendar.DAY_OF_MONTH);
+        }
     }
 
     /**
@@ -180,17 +196,17 @@ public class Dog
             (otherDog.getLastAppointment() != null)) {
                 if (this.getLastAppointment().equals(
                     otherDog.getLastAppointment())) {
-                           return true;
+                    return true;
                 } else {
                     return false;
                 }
             }
-                return true;
+            return true;
         }
         return false;
 
     }
- 
+
     /**
      *
      * Class method that returns the next id a dog should be given and 
@@ -198,10 +214,8 @@ public class Dog
      *
      */
     public static int assignNextID() {
-     return nextDogID++;
+        return nextDogID++;
     }
-    
 
-    
     
 }
